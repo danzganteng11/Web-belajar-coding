@@ -40,6 +40,41 @@ Tutorial ini menjelaskan cara menjalankan desktop Linux (Tiny Computer XFCE) lan
 ### 3. Jalankan Termux & Pasang ADB Tools
 
 ```bash
-apt update
-apt upgrade
-pkg install android-tools
+# LANGKAH 1–4: Update dan Install ADB di Termux
+apt update && apt upgrade -y
+pkg install android-tools -y
+
+# LANGKAH 5–7: Pairing ADB Wireless
+adb pair localhost:40365  # GANTI dengan pairing port dari Wireless Debugging
+# Masukkan pairing code (misalnya: 123456)
+adb connect localhost:44739  # GANTI dengan port adb connect kamu
+adb devices
+
+# LANGKAH 8: Fix Signal 9 / Phantom Kill Bypass
+adb shell "/system/bin/device_config set_sync_disabled_for_tests persistent"
+adb shell "/system/bin/device_config put activity_manager max_phantom_processes 2147483647"
+adb shell settings put global settings_enable_monitor_phantom_procs false
+
+# LANGKAH 9: Buka Tiny Computer (manual buka APK), login:
+# Username: tiny
+# Password: tiny
+# Tekan tombol "Start Desktop"
+
+# LANGKAH 10: Setelah login ke desktop Tiny, buka terminal lalu ketik:
+tmoe
+# Pilih english_united states ➜ manager ➜ locale ➜ english_united states
+# lalu ketik:
+exit
+# lalu tutup paksa Tiny dan buka ulang agar bahasa jadi English
+
+# LANGKAH 11: (Opsional) install browser dan WPS Office:
+sudo apt update
+sudo apt install firefox-esr -y
+# Atau:
+sudo apt install midori -y
+
+# (Opsional) Install .deb
+# sudo dpkg -i namafile.deb
+# sudo apt --fix-broken install
+
+# DONE ✅ SELAMAT MENIKMATI XFCE TANPA ROOT DAN TANPA PC
