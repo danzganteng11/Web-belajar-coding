@@ -43,19 +43,3 @@ Tutorial ini menjelaskan cara menjalankan desktop Linux (Tiny Computer XFCE) lan
 apt update
 apt upgrade
 pkg install android-tools
-
----
-
-### 4. Pairing ADB via Wireless (Localhost)
-Buka Wireless Debugging di HP kamu
-
-Ambil info pairing dan port (misal: localhost:40365)
-
-Jalankan:
-
-'''bash
-adb pair localhost:40365
-# Masukkan pairing code dari layar HP
-
-adb connect localhost:44739
-adb devices
